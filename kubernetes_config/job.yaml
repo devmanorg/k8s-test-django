@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate
+spec:
+  template:
+    metadata:
+      name: migrate
+    spec:
+      containers:
+      - name: hello-world
+        image: zusmanone/django_test:latest
+        command: ["python", "manage.py","migrate","--noinput"]
+      restartPolicy: OnFailure
