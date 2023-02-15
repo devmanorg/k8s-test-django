@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
         - name : kgb-web
-          image: zusmanone/django_test:latest
+          image: zusmanone/django_test:step6
           ports:
             - containerPort: 80
-          envFrom:
-            - configMapRef:
-                name: web-config
+          env:
+          - name: DEBUG
+            value: 'False'
 ---
 apiVersion: v1
 kind: Service

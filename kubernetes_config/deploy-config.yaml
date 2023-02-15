@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deploy-config
+  labels:
+    app: ecommerce
+    tier: fsb-web
+data:
+  DEBUG: 'True'
+

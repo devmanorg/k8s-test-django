@@ -1,0 +1,42 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: my-django-deployment
+  labels:
+    app : my-k8s-deployment
+spec:
+  selector:
+    matchLabels:
+      project: fsb
+  template:
+    metadata:
+      labels:
+        project: fsb   # Service will look for those PODS Labels!!!
+    spec:
+      containers:
+        - name : fsb-web
+          image: zusmanone/django_test:step6
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: deploy-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-pod-config
+  labels:
+    env  : prod
+    owner: ZusmanOne
+spec:
+  selector:
+    project: fsb    # Selecting PODS with those Labels
+  ports:
+    - name      : app-listener
+      protocol  : TCP
+      port      : 80  # Port on Load Balancer
+      targetPort: 80  # Port on POD
+
+  type: NodePort
