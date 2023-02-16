@@ -35,4 +35,23 @@ $ docker-compose run web ./manage.py createsuperuser
 
 
 # Работа в Kubernetes
-Устан
+
+1) Для работы в kubernetes требуется создать кластер, в данном уроке в роли кластера
+выступает minikibe. Для его установки потребуется virtualbox, [kubectl](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/), [minikube](https://minikube.sigs.k8s.io/docs/drivers/virtualbox/)
+2) Для того что бы создать pod, воспользуйтесь командой:
+```sh
+kubectl run --image=имя_докеробраза имя_пода --port=80
+```
+3) Что бы развернуть django проект на k8s.Нужно проделать следуюшие манипуляции:
+    1. Установить postgres и создать базу данных локально
+    2. Установить postgres в кластере minikube [по этому туториалу](https://artifacthub.io/packages/helm/bitnami/postgresql)
+    в качестве параметров вам нужно прописать: `--set global.postgresql.auth.database=db_name`,
+    `--set global.postgresql.auth.username=db_user`
+   `--set global.postgresql.auth.password=db_password`
+   3. Пробросить порты для базы данных этой командой:
+    ```sh
+    kubectl port-forward --namespace default svc/postgres_name 5432:5432
+    ```
+   4. Создать под c django проектом и так же пробросить порт для этого пода
+   5. Перейти в браузере по локальному адресу и порту который был указан в 4 шаге
+Это самые начальные  операции для разворачивания проекта на Kubernetes.

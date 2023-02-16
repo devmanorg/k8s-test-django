@@ -8,6 +8,15 @@ services:
     env_file:
       - ./backend_main_django/project/.env
 
+  web:
+    build: backend_main_django
+    image: django_app
+    volumes:
+      - ./backend_main_django:/code
+    env_file:
+      - ./backend_main_django/project/.env
+    depends_on:
+      - db
 
 volumes:
   db_data:
