@@ -9,6 +9,5 @@ services:
       - ./backend_main_django/project/.env
 
 
-
 volumes:
   db_data:
