@@ -1,16 +1,16 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: django-clearsessions-once
+  name: django-clearsessions
 spec:
-  schedule: "* * * */1 *"
+  schedule: "*/1 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: django-clearsessions-once
-            image: zusmanone/django_test:latest
+          - name: django-clearsessions
+            image: zusmanone/django_test:step6
             imagePullPolicy: IfNotPresent
             command:
             - python
