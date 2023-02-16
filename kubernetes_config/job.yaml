@@ -9,6 +9,6 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: zusmanone/django_test:latest
+        image: zusmanone/django_test:step6
         command: ["python", "manage.py","migrate","--noinput"]
       restartPolicy: OnFailure
