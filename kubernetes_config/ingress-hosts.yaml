@@ -5,13 +5,13 @@ metadata:
 
 spec:
   rules:
-  - host: star-burger.test
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: django
-            port:
-              number: 80
+    - host: star-burger.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: django
+                port:
+                  number: 80

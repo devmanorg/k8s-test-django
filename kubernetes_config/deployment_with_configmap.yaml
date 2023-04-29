@@ -4,6 +4,8 @@ metadata:
   name: my-django-deployment
   labels:
     app : my-k8s-deployment
+    owner: zusmanone
+
 spec:
   selector:
     matchLabels:
@@ -11,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        project: fsb   # Service will look for those PODS Labels!!!
+        project: fsb # Service will look for those PODS Labels!!!
     spec:
       containers:
         - name : fsb-web
@@ -26,10 +28,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-pod-config
+  name: django
   labels:
-    env  : prod
-    owner: ZusmanOne
+    app : my-k8s-deployment
+    owner: zusmanone
 spec:
   selector:
     project: fsb    # Selecting PODS with those Labels
@@ -38,5 +40,4 @@ spec:
       protocol  : TCP
       port      : 80  # Port on Load Balancer
       targetPort: 80  # Port on POD
-
-  type: NodePort
+  type: ClusterIP
