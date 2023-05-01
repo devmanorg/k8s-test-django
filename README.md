@@ -52,6 +52,15 @@ kubectl run --image=имя_докеробраза имя_пода --port=80
     ```sh
     kubectl port-forward --namespace default svc/postgres_name 5432:5432
     ```
-   4. Создать под c django проектом и так же пробросить порт для этого пода
+   4. Создать под c django проектом и так же пробросить порт для этого пода:
+   Для этого:
+      1) Запустить манифест в котором присутствует секрет конфиг
+      2) Создать yaml-файл(kind = secret)  со своими конфидиенциальными данными(SECRET_KEY,DB_PASSWORD, etc.)
+      3) Применить секрет  командами:
+        ```sh 
+       kubectl apply -f secret_name.yaml
+       kubectl get secret mysecret -o yaml - покажет зашифрованные переменные
+        ```
+      4) kubectl port-forward name_pod host_port:pod_port
    5. Перейти в браузере по локальному адресу и порту который был указан в 4 шаге
 Это самые начальные  операции для разворачивания проекта на Kubernetes.

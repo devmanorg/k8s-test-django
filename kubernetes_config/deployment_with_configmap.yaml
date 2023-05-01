@@ -21,6 +21,8 @@ spec:
           ports:
             - containerPort: 80
           envFrom:
+            - secretRef:
+                name: mysecret
             - configMapRef:
                 name: deploy-config
 
