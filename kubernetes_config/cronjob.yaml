@@ -13,6 +13,9 @@ spec:
           containers:
           - name: django-clearsessions
             image: zusmanone/django_test:step6
+            envFrom:
+              - secretRef:
+                  name: mysecret
             imagePullPolicy: IfNotPresent
             command:
             - python

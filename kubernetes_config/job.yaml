@@ -13,5 +13,8 @@ spec:
       containers:
       - name: hello-world
         image: zusmanone/django_test:step6
+        envFrom:
+          - secretRef:
+              name: mysecret
         command: ["python", "manage.py","migrate","--noinput"]
       restartPolicy: OnFailure
