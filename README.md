@@ -53,27 +53,26 @@ kubectl run --image=имя_докеробраза имя_пода --port=80
     kubectl port-forward --namespace default svc/postgres_name 5432:5432
     ```
    4. Создать под c django проектом и так же пробросить порт для этого пода:
-   Для этого:
-      1)Создать yaml-файл со своими конфидиенциальными данными(SECRET_KEY,DB_PASSWORD, etc.) 
-      ```sh 
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: mysecret
-      type: Opaque
-      stringData:
-          SECRET_KEY: "replace_me"
-          DATABASE_URL: "postgres://test_k8s:test_k8s@psql-test-postgresql:5432/test_k8s"
-          POSTGRES_DB: "test_k8s"
-          POSTGRES_USER: "test_k8s"
-          POSTGRES_PASSWORD: "test_k8s"
-      ```
-      3) Применить секрет  командами:
-        ```sh 
-       kubectl apply -f secret_name.yaml
-       kubectl get secret mysecret -o yaml - покажет зашифрованные переменные
-        ```
-      4) kubectl port-forward name_pod host_port:pod_port
+      1) Создать yaml-файл со своими конфидиенциальными данными(SECRET_KEY,DB_PASSWORD, etc.) 
+         ```sh 
+         apiVersion: v1
+         kind: Secret
+         metadata:
+           name: mysecret
+         type: Opaque
+         stringData:
+             SECRET_KEY: "replace_me"
+             DATABASE_URL: "postgres://test_k8s:test_k8s@psql-test-postgresql:5432/test_k8s"
+             POSTGRES_DB: "test_k8s"
+             POSTGRES_USER: "test_k8s"
+             POSTGRES_PASSWORD: "test_k8s"
+         ```
+      2) Применить секрет  командами:
+           ```sh 
+          kubectl apply -f secret_name.yaml
+          kubectl get secret mysecret -o yaml - покажет зашифрованные переменные
+           ```
+      3) kubectl port-forward name_pod host_port:pod_port
    
    5. Перейти в браузере по локальному адресу и порту который был указан в 4 шаге
 Это самые начальные  операции для разворачивания проекта на Kubernetes.
